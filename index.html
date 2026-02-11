@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación ❤️</title>
+
+<style>
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+background:linear-gradient(160deg,#ff9a9e,#fad0c4);
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+overflow:hidden;
+}
+
+/* pétalos */
+
+.petalo{
+position:fixed;
+top:-20px;
+font-size:18px;
+animation:caer linear forwards;
+opacity:.8;
+}
+
+@keyframes caer{
+to{
+transform:translateY(110vh) rotate(360deg);
+opacity:0;
+}
+}
+
+/* sobre */
+
+.sobre{
+width:85%;
+max-width:320px;
+height:180px;
+background:#ff4b7d;
+border-radius:14px;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+font-size:20px;
+text-align:center;
+padding:10px;
+animation:latido 1.5s infinite;
+cursor:pointer;
+}
+
+@keyframes latido{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.05);}
+}
+
+/* tarjeta */
+
+.tarjeta{
+display:none;
+width:90%;
+max-width:380px;
+background:white;
+border-radius:20px;
+padding:20px;
+box-shadow:0 8px 25px rgba(0,0,0,0.15);
+animation:aparecer 1s ease;
+text-align:center;
+}
+
+@keyframes aparecer{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;}
+}
+
+h2{color:#ff4b7d;margin:5px 0;}
+
+p{color:#444;font-size:15px;margin:6px 0;}
+
+.contador{
+margin:10px 0;
+font-weight:bold;
+color:#ff4b7d;
+}
+
+/* botones */
+
+button{
+width:100%;
+padding:14px;
+margin:6px 0;
+border:none;
+border-radius:25px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.si{background:#25D366;color:white;}
+.no{background:#ff6b6b;color:white;}
+.mapa{background:#4b7dff;color:white;}
+.fuego{
+background:linear-gradient(45deg,#ff512f,#dd2476);
+color:white;
+}
+
+/* sorpresa */
+
+.sorpresa{
+display:none;
+margin-top:10px;
+padding:12px;
+background:#fff0f5;
+border-radius:12px;
+color:#444;
+font-size:14px;
+animation:aparecer 0.6s ease;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="sobre" class="sobre" onclick="abrir()">
+💌 Toca para abrir tu invitación
+</div>
+
+<div id="tarjeta" class="tarjeta">
+
+<h2>✨ Invitación romántica ✨</h2>
+
+<p>
+Quiero invitarte a una cita especial conmigo ❤️
+</p>
+
+<p>
+📅 Lunes 16 de febrero  
+🕗 5:00 PM  
+📍 Astorga Restaurante 
+</p>
+
+<div class="contador" id="countdown"></div>
+
+<p>¿Aceptas esta cita conmigo?</p>
+
+<button class="si" onclick="si()">Sí quiero ❤️</button>
+<button class="no" onclick="no()">No 😜</button>
+<button class="mapa" onclick="mapa()">Ver ubicación 📍</button>
+<button class="fuego" onclick="fuego()">🔥 Sorpresa</button>
+
+<div id="sorpresa" class="sorpresa">
+🔥 Después de nuestra cena romántica…  
+nos espera otra cita privada 😉  
+Destino: *Motel Dubai*  
+Te pones lo mas sexi, que te dare un cojidon bb
+</div>
+
+</div>
+
+<script>
+
+/* pétalos */
+
+function crearPetalo(){
+const p=document.createElement("div");
+p.className="petalo";
+p.innerHTML="🌸";
+p.style.left=Math.random()*100+"vw";
+p.style.animationDuration=(4+Math.random()*3)+"s";
+document.body.appendChild(p);
+setTimeout(()=>p.remove(),7000);
+}
+setInterval(crearPetalo,600);
+
+/* abrir */
+
+function abrir(){
+document.getElementById("sobre").style.display="none";
+document.getElementById("tarjeta").style.display="block";
+}
+
+/* cuenta regresiva */
+
+const fecha=new Date("Feb 16, 2026 20:00:00").getTime();
+
+setInterval(()=>{
+const ahora=new Date().getTime();
+const diff=fecha-ahora;
+
+if(diff<0){
+document.getElementById("countdown").innerHTML="❤️ ¡Es hoy!";
+return;
+}
+
+const d=Math.floor(diff/(1000*60*60*24));
+const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+const m=Math.floor((diff%(1000*60*60))/(1000*60));
+
+document.getElementById("countdown").innerHTML=
+"⏳ Faltan "+d+" días "+h+"h "+m+"m";
+},1000);
+
+/* botones */
+
+function si(){
+window.open("https://wa.me/523112533889?text=Sí quiero nuestra cita ❤️");
+}
+
+function no(){
+alert("Respuesta incorrecta 😌 intenta otra vez");
+}
+
+function mapa(){
+window.open("https://maps.app.goo.gl/uV9RRWTtoWevcuFx6?g_st=ic");
+}
+
+function fuego(){
+const s=document.getElementById("sorpresa");
+s.style.display = s.style.display==="block" ? "none" : "block";
+}
+
+</script>
+
+</body>
+</html>
